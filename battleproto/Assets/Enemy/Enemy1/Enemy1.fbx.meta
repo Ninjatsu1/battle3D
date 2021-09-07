@@ -1,14 +1,59 @@
 fileFormatVersion: 2
-guid: d29a78ed296d32547b2cb6905aec021c
+guid: 2596a8c86d88e5149a5543c5a900c11a
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch40_1001_Diffuse
+    second: {fileID: 2800000, guid: dde39bd4e0a61694491e733a0e1c2957, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch40_1001_Glossiness
+    second: {fileID: 2800000, guid: 7b6531e0a422f6d42b2d9f68d794ab1b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch40_1001_Normal
+    second: {fileID: 2800000, guid: 3aa8bf8bfd171e946a50bb9575ab7e6f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch40_1001_Specular
+    second: {fileID: 2800000, guid: 8cc952928daf05749b8ecf7c208ad842, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch40_1002_Diffuse
+    second: {fileID: 2800000, guid: 81c6c08dfc2689d4f964e2b79d001a10, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch40_1002_Glossiness
+    second: {fileID: 2800000, guid: 9ff9ba7f024f44d438065e857558d465, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch40_1002_Normal
+    second: {fileID: 2800000, guid: 49a18d12a541af543bc50f17f8808028, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch40_1002_Specular
+    second: {fileID: 2800000, guid: 7bb3169a3ac1f7d40ac5255d0bc224cb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch40_1003_Diffuse
+    second: {fileID: 2800000, guid: 861e9debe04647d4aa3f2f65e1039681, type: 3}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -26,7 +71,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -91,14 +136,14 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 3
+  animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
