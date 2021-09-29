@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
+    [Header("Character settings")]
     public float lookRadius = 10f;
     private Transform player;
     private NavMeshAgent agent;
@@ -9,9 +10,15 @@ public class Enemy : MonoBehaviour
     private float speed = 0;
     private float acceleration;
     public float deaceleration = 0.5f;
-    private bool destinationReached = false;
-    private bool attacking = false;
+    //private bool attacking = false;
 
+    [Header("Attack weapon settings")]
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask playerLayer;
+    private bool playerHit = false;
+
+    //Animation hashes
     private int speedHash;
     private int attackHash;
     // Start is called before the first frame update
@@ -29,27 +36,45 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
         float distance = Vector3.Distance(player.position, transform.position);
         if (distance <= lookRadius)
         {
             Run();
             agent.SetDestination(player.position);
+            animator.ResetTrigger(attackHash);
         }
         if (distance < agent.stoppingDistance)
         {
-            attacking = true;
-            StopRun();
-            animator.SetBool(attackHash, attacking);
-            Debug.Log("Stopped");
+            Attack();
+            DetectHit();
         }
     }
 
+    //Attack player
+    private void Attack()
+    {
+        StopRun();
+        animator.SetTrigger(attackHash);
+    }
+
+    //Detect if player was hit
+    private void DetectHit()
+    {
+        Collider[] hitPlayers = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
+        foreach (Collider player in hitPlayers)
+        {
+            playerHit = true;
+            if (playerHit)
+            {
+                Debug.Log("hit" + player.name);
+            }
+        }
+        playerHit = false;
+    }
     //Animate run animation
     private void Run()
     {
-        attacking = false;
-        animator.SetBool(attackHash, attacking);
+        animator.ResetTrigger(attackHash);
         animator.SetFloat(speedHash, speed);
      
     }
@@ -57,9 +82,14 @@ public class Enemy : MonoBehaviour
     {
         animator.SetFloat(speedHash, 0);
     }
+
+    //Look radius
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
