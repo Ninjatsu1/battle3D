@@ -7,6 +7,7 @@ namespace StarterAssets
         private Animator _animator;
         private StarterAssetsInputs _input;
 
+        public int baseDamage = 3;
         public Transform attackPoint;
         public float attackRange = 0.5f;
         public LayerMask enemyLayers;
@@ -30,9 +31,18 @@ namespace StarterAssets
         private void DetectHit()
         {
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-            foreach(Collider enemy in hitEnemies)
+            for (int i = 0; i < hitEnemies.Length; i++)
             {
-                Debug.Log("hit" + enemy.name);
+                if (hitEnemies[i].CompareTag("Enemy"))
+                {
+                    Debug.Log("Enemy hit");
+                   EnemyStats enemyStats = hitEnemies[i].GetComponent<EnemyStats>();
+                    if (enemyStats != null)
+                    {
+                        Debug.Log("Enemy damaged");
+                        enemyStats.TakeDamage(baseDamage);
+                    }
+                }
             }
         }
         //Check if player pressed button, then animete 

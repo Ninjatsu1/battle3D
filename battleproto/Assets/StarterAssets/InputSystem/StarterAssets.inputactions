@@ -44,6 +44,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Spell",
+                    "type": "Button",
+                    "id": "30984b7c-2430-4d4e-9a48-04a64016c7bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -231,6 +239,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a644199-aae0-499a-8763-89bb1b5f325f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Spell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

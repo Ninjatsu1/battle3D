@@ -1,7 +1,12 @@
-using UnityEngine;
 using UnityEngine.AI;
-public class Enemy : MonoBehaviour
+using UnityEngine;
+using System.Collections;
+using System;
+
+public class EnemyController : MonoBehaviour
 {
+    //Käytä coroutinea hyökkäys cooldownissa
+    //Hyökkäys suoritettu bool
     [Header("Character settings")]
     public float lookRadius = 10f;
     private Transform player;
@@ -17,10 +22,18 @@ public class Enemy : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask playerLayer;
     private bool playerHit = false;
+    public int baseDamage = 3;
+    public float attackCooldown;
+    private bool attacked; //If needed -> make public method that returns value
+    public float cooldown = 2;
+    public float cooldownTimer = 0;
 
+    private IEnumerator coroutine;    
     //Animation hashes
     private int speedHash;
     private int attackHash;
+    public bool Attacked => attacked;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +47,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Move()
     {
         float distance = Vector3.Distance(player.position, transform.position);
         if (distance <= lookRadius)
@@ -42,43 +55,51 @@ public class Enemy : MonoBehaviour
             Run();
             agent.SetDestination(player.position);
             animator.ResetTrigger(attackHash);
+
         }
-        if (distance < agent.stoppingDistance)
-        {
-            Attack();
-            DetectHit();
-        }
+
     }
 
-    //Attack player
-    private void Attack()
+    //Start one attack
+    public IEnumerator StartAttack()
     {
-        StopRun();
         animator.SetTrigger(attackHash);
+        DetectHit();
+        yield return new WaitForSeconds(1);
+        attacked = true;
     }
 
     //Detect if player was hit
-    private void DetectHit()
+    public void DetectHit()
     {
         Collider[] hitPlayers = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
-        foreach (Collider player in hitPlayers)
+        for (int i = 0; i < hitPlayers.Length; i++)
         {
-            playerHit = true;
-            if (playerHit)
+            if (hitPlayers[i].CompareTag("Player"))
             {
-                Debug.Log("hit" + player.name);
+                playerHit = true;
+                PlayerStats playerStats = hitPlayers[i].GetComponent<PlayerStats>();
+                if (playerStats != null)
+                {
+                    if (playerHit)
+                    {
+                        Debug.Log("Player damaged");
+                        playerStats.TakeDamege(baseDamage); 
+                    }
+                    playerHit = false;
+                }
             }
         }
-        playerHit = false;
+        
     }
     //Animate run animation
-    private void Run()
+    public void Run()
     {
         animator.ResetTrigger(attackHash);
         animator.SetFloat(speedHash, speed);
-     
+
     }
-    private void StopRun()
+    public void StopRun()
     {
         animator.SetFloat(speedHash, 0);
     }
@@ -92,4 +113,13 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+
+    //Start attack
+    public void Attack()
+    {
+        StartCoroutine(StartAttack());
+    }
+
+    //Negate attack boolean
+    public void NegateAttacked() => attacked = false;
 }
