@@ -52,6 +52,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Sidestep",
+                    "type": "Button",
+                    "id": "ab303279-f78b-495a-b60f-ba24469e7169",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -250,6 +258,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Spell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e21223ea-60bf-4b2d-91be-8ae65a1875ba",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Sidestep",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
