@@ -27,6 +27,10 @@ public class EnemyController : MonoBehaviour
     private bool attacked; //If needed -> make public method that returns value
     public float cooldown = 2;
     public float cooldownTimer = 0;
+    [Header("Aggro settings")]
+    public GameObject spawn;
+    public bool hasAggro = false;
+
 
     private IEnumerator coroutine;    
     //Animation hashes
@@ -52,10 +56,14 @@ public class EnemyController : MonoBehaviour
         float distance = Vector3.Distance(player.position, transform.position);
         if (distance <= lookRadius)
         {
+            hasAggro = true;
             Run();
             agent.SetDestination(player.position);
             animator.ResetTrigger(attackHash);
-
+        } else
+        {
+            hasAggro = false;
+            agent.SetDestination(spawn.transform.position);
         }
 
     }
